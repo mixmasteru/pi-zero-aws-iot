@@ -28,7 +28,7 @@ myAWSIoTMQTTClient.connect()
 print("connected\n")
 # myAWSIoTMQTTClient.subscribe("sdk/test/Python", 1, customCallback)
 # time.sleep(2)
-last_time = time.time()
+last_time = 0
 dht = DHT22(gpio)
 try:
     # Publish to the same topic in a loop forever
@@ -46,6 +46,7 @@ try:
                     myAWSIoTMQTTClient.publish(topic_hum, json.dumps(payload), 1)
                     last_time = now
                     output = 'Temp: {0:0.1f}*C Hum: {1:0.1f}%'.format(DHT22.temperature, DHT22.humidity)
+                    print("output")
             else:
                 print("no data from sensor")
             time.sleep(sleeps)
