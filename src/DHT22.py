@@ -18,7 +18,10 @@ class DHT22:
         humidity, temperature = Adafruit_DHT.read_retry(self.sensor, self.gpio)
         self.humidity = humidity
         self.temperature = temperature
-        return True
+
+        if self.humidity is not None and self.temperature is not None:
+            return True
+        return False
 
     def format_payload(self, type, now, value):
         localtime = time.localtime(now)
