@@ -34,7 +34,7 @@ try:
     # Publish to the same topic in a loop forever
     while True:
         try:
-            done = dht.readSensor()
+            done = dht.read_sensor()
             if done:
                 now = time.time()
                 localtime = time.localtime(now)
