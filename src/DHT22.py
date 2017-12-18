@@ -28,7 +28,7 @@ class DHT22:
         pl = {'timestamp': int(now),
               'type': type,
               'datetime': time.strftime("%Y%m%d%H%M%S", localtime),
-              'value': value}
+              'value': round(value, 2)}
 
         return pl
 
