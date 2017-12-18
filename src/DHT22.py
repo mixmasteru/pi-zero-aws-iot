@@ -16,8 +16,8 @@ class DHT22:
         self.humidity = None
         self.temperature = None
         humidity, temperature = Adafruit_DHT.read_retry(self.sensor, self.gpio)
-        self.humidity = humidity
-        self.temperature = temperature
+        self.humidity = round(humidity,2)
+        self.temperature = round(temperature,2)
 
         if self.humidity is not None and self.temperature is not None:
             return True
@@ -28,7 +28,7 @@ class DHT22:
         pl = {'timestamp': int(now),
               'type': type,
               'datetime': time.strftime("%Y%m%d%H%M%S", localtime),
-              'value': round(value, 2)}
+              'value': value, 2}
 
         return pl
 
