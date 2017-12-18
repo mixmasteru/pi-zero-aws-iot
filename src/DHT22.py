@@ -15,7 +15,9 @@ class DHT22:
     def read_sensor(self):
         self.humidity = None
         self.temperature = None
-        self.humidity, self.temperature = Adafruit_DHT.read_retry(self.sensor, self.gpio)
+        humidity, temperature = Adafruit_DHT.read_retry(self.sensor, self.gpio)
+        self.humidity = humidity
+        self.temperature = temperature
         return True
 
     def format_payload(self, type, now, value):
