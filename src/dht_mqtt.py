@@ -45,6 +45,7 @@ try:
                     payload = dht.format_payload('hum', now, DHT22.humidity)
                     myAWSIoTMQTTClient.publish(topic_hum, json.dumps(payload), 1)
                     last_time = now
+                    output = 'Temp: {0:0.1f}*C Hum: {1:0.1f}%'.format(DHT22.temperature, DHT22.humidity)
             else:
                 print("no data from sensor")
             time.sleep(sleeps)
@@ -52,7 +53,6 @@ try:
             print("--------------------")
             traceback.print_exc()
             raise Exception
-
 
 except KeyboardInterrupt:
     print('Exit')

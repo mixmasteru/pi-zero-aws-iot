@@ -4,7 +4,6 @@ import time
 
 class DHT22:
 
-    #Sensortyp und GPIO festlegen
     sensor = Adafruit_DHT.DHT22
     gpio = None
     humidity = None
