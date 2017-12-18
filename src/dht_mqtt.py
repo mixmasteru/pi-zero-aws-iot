@@ -40,12 +40,12 @@ try:
                 localtime = time.localtime(now)
 
                 if (last_time+intv) <= now:
-                    payload = dht.format_payload('temp', now, DHT22.temperature)
+                    payload = dht.format_payload('temp', now, dht.temperature)
                     myAWSIoTMQTTClient.publish(topic_temp, json.dumps(payload), 1)
-                    payload = dht.format_payload('hum', now, DHT22.humidity)
+                    payload = dht.format_payload('hum', now, dht.humidity)
                     myAWSIoTMQTTClient.publish(topic_hum, json.dumps(payload), 1)
                     last_time = now
-                    print(str(DHT22.temperature)+" "+str(DHT22.humidity))
+                    print(str(dht.temperature)+" "+str(dht.humidity))
             else:
                 print("no data from sensor")
             time.sleep(sleeps)
