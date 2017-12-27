@@ -12,11 +12,11 @@ class SDS011:
     pm25 = None
 
     def __init__(self, port, baudrate):
-        ser = serial.Serial()
-        ser.port = port
-        ser.baudrate = baudrate
-        ser.open()
-        ser.flushInput()
+        self.ser = serial.Serial()
+        self.ser.port = port
+        self.ser.baudrate = baudrate
+        self.ser.open()
+        self.ser.flushInput()
 
     def dump_data(self, d):
         print(' '.join(x.encode('hex') for x in d))
