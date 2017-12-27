@@ -7,6 +7,7 @@ sudo apt-get update
 sudo apt-get install git
 sudo apt-get install -y python-pip
 pip install AWSIoTPythonSDK
+pip install pyserial
 git clone https://github.com/adafruit/Adafruit_Python_DHT.git
 cd Adafruit_Python_DHT/
 sudo python setup.py install
