@@ -1,4 +1,4 @@
-#
+# -*- coding: utf-8 -*-
 #  SDS011
 #
 #  based on work from luetzel <webmaster_at_raspberryblog.de>
