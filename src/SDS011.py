@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
-#  SDS011
-#
-#  based on work from luetzel <webmaster_at_raspberryblog.de>
 from __future__ import print_function
 import serial, struct, sys, time
 
 
 class SDS011:
+    """SDS011 PM sensor reader
+
+    based on work from luetzel <webmaster_at_raspberryblog.de>
+    """
 
     pm10 = None
     pm25 = None

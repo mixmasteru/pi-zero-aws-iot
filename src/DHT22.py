@@ -16,11 +16,12 @@ class DHT22:
         self.humidity = None
         self.temperature = None
         humidity, temperature = Adafruit_DHT.read_retry(self.sensor, self.gpio)
-        self.humidity = round(humidity, 2)
-        self.temperature = round(temperature, 2)
 
         if self.humidity is not None and self.temperature is not None:
+            self.humidity = round(humidity, 2)
+            self.temperature = round(temperature, 2)
             return True
+
         return False
 
     def format_payload(self, type, now, value):
