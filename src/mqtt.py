@@ -5,8 +5,8 @@ import time
 import json
 import traceback
 from config import *
-from DHT22 import DHT22
-from SDS011 import SDS011
+from src.sensor.DHT22 import DHT22
+from src.sensor.SDS011 import SDS011
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 
 sleeps = 60
