@@ -26,10 +26,10 @@ class MyBME280(Base):
         return True
 
     def get_temp_payload(self, now):
-        return super(BME280, self).format_payload('temperature', now, round(self.temperature, 2))
+        return super(MyBME280, self).format_payload('temperature', now, round(self.temperature, 2))
 
     def get_hum_payload(self, now):
-        return super(BME280, self).format_payload('humidity', now, round(self.humidity, 2))
+        return super(MyBME280, self).format_payload('humidity', now, round(self.humidity, 2))
 
     def get_pres_payload(self, now):
-        return super(BME280, self).format_payload('pressure', now, round(self.pressure, 2))
+        return super(MyBME280, self).format_payload('pressure', now, round(self.pressure, 2))
