@@ -5,8 +5,8 @@ import time
 import json
 import traceback
 from config import *
-from src.sensor.MyBME280 import MyBME280
-from src.sensor.SDS011 import SDS011
+from sensor.MyBME280 import MyBME280
+from sensor.SDS011 import SDS011
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 
 sleeps = 60
