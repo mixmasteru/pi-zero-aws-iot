@@ -45,7 +45,7 @@ try:
                 if done:
                     payload = sds.format_payload('pm10', now, sds.pm10)
                     myAWSIoTMQTTClient.publish(topic_pm10, json.dumps(payload), 1)
-                    payload = dht.format_payload('pm25', now, sds.pm25)
+                    payload = sds.format_payload('pm25', now, sds.pm25)
                     myAWSIoTMQTTClient.publish(topic_pm25, json.dumps(payload), 1)
                     print("pm10: "+str(sds.pm10)+" pm25: "+str(sds.pm25))
                 else:
@@ -61,7 +61,7 @@ try:
                     myAWSIoTMQTTClient.publish(topic_pre, json.dumps(payload), 1)
                     print("temp: "+str(bme.temperature)+" hum: "+str(bme.humidity)+" pre: "+str(bme.pressure))
                 else:
-                    print("no data from DHT sensor")
+                    print("no data from BME280 sensor")
 
                 last_time = now
             time.sleep(sleeps)
