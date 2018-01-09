@@ -19,3 +19,5 @@ git clone https://github.com/adafruit/Adafruit_Python_BME280.git
 cd Adafruit_Python_BME280
 sudo python setup.py install
 ```
+
+for BME280 enable i2c with raspi-config tool

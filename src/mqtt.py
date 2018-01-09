@@ -5,7 +5,7 @@ import time
 import json
 import traceback
 from config import *
-from src.sensor.DHT22 import DHT22
+from src.sensor.MyBME280 import MyBME280
 from src.sensor.SDS011 import SDS011
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 
@@ -30,7 +30,7 @@ print("connected\n")
 # myAWSIoTMQTTClient.subscribe("sdk/test/Python", 1, customCallback)
 # time.sleep(2)
 last_time = 0
-dht = DHT22(gpio)
+bme = MyBME280(ic2_address=bme280_ic2)
 sds = SDS011(sds_port, sds_baudrate)
 try:
     # Publish to the same topic in a loop forever
@@ -50,14 +50,16 @@ try:
                     print("pm10: "+str(sds.pm10)+" pm25: "+str(sds.pm25))
                 else:
                     print("no data from SDS sensor")
-                # DHT2302
-                done = dht.read_sensor()
+                # BME280
+                done = bme.read_sensor()
                 if done:
-                    payload = dht.format_payload('temp', now, dht.temperature)
+                    payload = bme.get_temp_payload(now)
                     myAWSIoTMQTTClient.publish(topic_temp, json.dumps(payload), 1)
-                    payload = dht.format_payload('hum', now, dht.humidity)
+                    payload = bme.get_hum_payload(now)
                     myAWSIoTMQTTClient.publish(topic_hum, json.dumps(payload), 1)
-                    print("temp: "+str(dht.temperature)+" hum: "+str(dht.humidity))
+                    payload = bme.get_pres_payload(now)
+                    myAWSIoTMQTTClient.publish(topic_pre, json.dumps(payload), 1)
+                    print("temp: "+str(bme.temperature)+" hum: "+str(bme.humidity)+" pre: "+str(bme.pressure))
                 else:
                     print("no data from DHT sensor")
 
