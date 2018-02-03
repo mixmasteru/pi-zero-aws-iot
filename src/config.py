@@ -14,6 +14,6 @@ cert = os.path.join(dir, 'cert.pem')
 key = os.path.join(dir, 'private.key')
 gpio = 4
 bme280_ic2 = 0x76
-
+bme280_offset = 2.1
 sds_port = "/dev/ttyUSB0"
 sds_baudrate = 9600

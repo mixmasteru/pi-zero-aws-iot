@@ -21,3 +21,8 @@ sudo python setup.py install
 ```
 
 for BME280 enable i2c with raspi-config tool
+check i2c address with command
+```bash
+sudo i2cdetect -y 1
+```
+change i2c address in config
