@@ -21,7 +21,7 @@ class MyBME280(Base):
         self.pressure = None
         self.humidity = None
 
-        self.temperature = self.sensor.read_temperature()+self.t_offset
+        self.temperature = self.sensor.read_temperature()-self.t_offset
         pascals = self.sensor.read_pressure()
         self.pressure = pascals / 100
         self.humidity = self.sensor.read_humidity()
