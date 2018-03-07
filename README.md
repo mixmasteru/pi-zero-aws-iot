@@ -5,8 +5,8 @@
 ```bash
 sudo apt-get update
 apt-get install -y build-essential python-pip python-dev python-smbus git
-pip install AWSIoTPythonSDK
-pip install pyserial
+pip install -r requirements.txt 
+
 git clone https://github.com/adafruit/Adafruit_Python_DHT.git
 cd Adafruit_Python_DHT/
 sudo python setup.py install
