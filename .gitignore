@@ -108,3 +108,7 @@ venv.bak/
 /.idea/
 /*.iml
 /Adafruit_Python_DHT/
+
+*.key
+*.pem
+*.crt

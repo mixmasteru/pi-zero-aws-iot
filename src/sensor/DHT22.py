@@ -17,7 +17,7 @@ class DHT22:
         self.temperature = None
         humidity, temperature = Adafruit_DHT.read_retry(self.sensor, self.gpio)
 
-        if self.humidity is not None and self.temperature is not None:
+        if humidity is not None and temperature is not None:
             self.humidity = round(humidity, 2)
             self.temperature = round(temperature, 2)
             return True
