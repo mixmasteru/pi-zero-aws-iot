@@ -5,11 +5,11 @@ import time
 import json
 import traceback
 from config import *
-from src.sensor.DHT22 import DHT22
+from sensor.DHT22 import DHT22
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 
-sleeps = 60
-intv = 60
+sleeps = 600
+intv = 600
 
 myAWSIoTMQTTClient = AWSIoTMQTTClient(device_name)
 myAWSIoTMQTTClient.configureEndpoint(host, 8883)
