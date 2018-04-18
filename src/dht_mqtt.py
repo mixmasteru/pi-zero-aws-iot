@@ -7,6 +7,7 @@ import traceback
 from config import *
 from sensor.DHT22 import DHT22
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
+from retrying import retry
 
 sleeps = 600
 intv = 600
@@ -30,6 +31,15 @@ print("connected\n")
 # time.sleep(2)
 last_time = 0
 dht = DHT22(gpio)
+
+
+@retry(wait_exponential_multiplier=1000, wait_exponential_max=30000, stop_max_delay=300000)
+def publish(topic, payload):
+    t = time.localtime(time.time())
+    print("sending data to "+topic+" "+str(t))
+    myAWSIoTMQTTClient.publish(topic, json.dumps(payload), 1)
+
+
 try:
     # Publish to the same topic in a loop forever
     while True:
@@ -41,11 +51,10 @@ try:
 
                 if (last_time+intv) <= now:
                     payload = dht.format_payload('temp', now, dht.temperature)
-                    myAWSIoTMQTTClient.publish(topic_temp, json.dumps(payload), 1)
+                    publish(topic_temp, payload)
                     payload = dht.format_payload('hum', now, dht.humidity)
-                    myAWSIoTMQTTClient.publish(topic_hum, json.dumps(payload), 1)
+                    publish(topic_hum, payload)
                     last_time = now
-                    print(str(dht.temperature)+" "+str(dht.humidity))
             else:
                 print("no data from sensor")
             time.sleep(sleeps)

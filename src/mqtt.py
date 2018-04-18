@@ -36,8 +36,10 @@ bme = MyBME280(ic2_address=bme280_ic2, t_offset=bme280_offset)
 sds = SDS011(sds_port, sds_baudrate)
 
 
-@retry(stop_max_attempt_number=3, wait_random_min=1000, wait_random_max=2000)
+@retry(wait_exponential_multiplier=1000, wait_exponential_max=30000, stop_max_delay=300000)
 def publish(topic, payload):
+    t = time.localtime(time.time())
+    print("sending data to "+topic+" "+str(t))
     myAWSIoTMQTTClient.publish(topic, json.dumps(payload), 1)
 
 
