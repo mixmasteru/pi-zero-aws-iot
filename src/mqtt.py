@@ -39,7 +39,7 @@ sds = SDS011(sds_port, sds_baudrate)
 @retry(wait_exponential_multiplier=1000, wait_exponential_max=30000, stop_max_delay=300000)
 def publish(topic, payload):
     t = time.localtime(time.time())
-    print("sending data to "+topic+" "+str(t))
+    print("sending data to "+topic+" "+time.strftime("%d-%m-%Y %H:%M:%S", t))
     myAWSIoTMQTTClient.publish(topic, json.dumps(payload), 1)
 
 
