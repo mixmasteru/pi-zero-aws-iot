@@ -32,14 +32,6 @@ print("connected\n")
 last_time = 0
 dht = DHT22(gpio)
 
-
-@retry(wait_exponential_multiplier=1000, wait_exponential_max=30000, stop_max_delay=300000)
-def publish(topic, payload):
-    t = time.localtime(time.time())
-    print("sending "+str(payload)+" to "+topic+" "+time.strftime("%d-%m-%Y %H:%M:%S", t))
-    myAWSIoTMQTTClient.publish(topic, json.dumps(payload), 1)
-
-
 try:
     # Publish to the same topic in a loop forever
     while True:
@@ -47,13 +39,17 @@ try:
             done = dht.read_sensor()
             if done:
                 now = time.time()
-                localtime = time.localtime(now)
+                t = time.strftime("%d-%m-%Y %H:%M:%S", time.localtime(now))
 
                 if (last_time+intv) <= now:
                     payload = dht.format_payload('temp', now, dht.temperature)
-                    publish(topic_temp, payload)
+                    print("sending "+str(payload)+" to "+topic_temp+" "+t)
+                    myAWSIoTMQTTClient.publish(topic_temp, json.dumps(payload), 1)
+
                     payload = dht.format_payload('hum', now, dht.humidity)
-                    publish(topic_hum, payload)
+                    print("sending "+str(payload)+" to "+topic_hum+" "+t)
+                    myAWSIoTMQTTClient.publish(topic_hum, json.dumps(payload), 1)
+
                     last_time = now
             else:
                 print("no data from sensor")
