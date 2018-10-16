@@ -11,7 +11,7 @@ from sensor.SDS011 import SDS011
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 
 sleeps = 60
-intv = 300
+intv = 600
 
 myAWSIoTMQTTClient = AWSIoTMQTTClient(device_name)
 myAWSIoTMQTTClient.configureEndpoint(host, 8883)
