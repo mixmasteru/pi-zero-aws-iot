@@ -7,7 +7,6 @@ import traceback
 from config import *
 from sensor.DHT22 import DHT22
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
-from retrying import retry
 
 sleeps = 600
 intv = 600
