@@ -9,10 +9,9 @@ from config import *
 from sensor.MyBME280 import MyBME280
 from sensor.SDS011 import SDS011
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
-from retrying import retry
 
 sleeps = 60
-intv = 600
+intv = 300
 
 myAWSIoTMQTTClient = AWSIoTMQTTClient(device_name)
 myAWSIoTMQTTClient.configureEndpoint(host, 8883)
@@ -67,7 +66,7 @@ try:
                     print("sending "+str(payload)+" to "+topic_hum+" "+t)
                     myAWSIoTMQTTClient.publish(topic_hum, json.dumps(payload), 1)
 
-                    publish(topic_pre, payload)
+                    payload = bme.get_pres_payload(now)
                     print("sending "+str(payload)+" to "+topic_pre+" "+t)
                     myAWSIoTMQTTClient.publish(topic_pre, json.dumps(payload), 1)
                 else:
