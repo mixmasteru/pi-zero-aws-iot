@@ -4,6 +4,9 @@ from __future__ import print_function
 import time
 import json
 import traceback
+
+from AWSIoTPythonSDK.exception.AWSIoTExceptions import publishTimeoutException
+
 from config import *
 from sensor.DHT22 import DHT22
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
@@ -23,15 +26,18 @@ myAWSIoTMQTTClient.configureConnectDisconnectTimeout(10)  # 10 sec
 myAWSIoTMQTTClient.configureMQTTOperationTimeout(5)  # 5 sec
 
 print("Start\n")
-# Connect and subscribe to AWS IoT
-myAWSIoTMQTTClient.connect()
-print("connected\n")
-# myAWSIoTMQTTClient.subscribe("sdk/test/Python", 1, customCallback)
-# time.sleep(2)
+
 last_time = 0
 dht = DHT22(gpio)
 
 try:
+    # Connect and subscribe to AWS IoT
+    print("connecting...")
+    myAWSIoTMQTTClient.connect()
+    print("connected")
+    # myAWSIoTMQTTClient.subscribe("sdk/test/Python", 1, customCallback)
+    # time.sleep(2)
+
     # Publish to the same topic in a loop forever
     while True:
         try:
@@ -53,6 +59,10 @@ try:
             else:
                 print("no data from sensor")
             time.sleep(sleeps)
+        except publishTimeoutException as pte:
+            print("--------------------")
+            print(pte.message)
+            print("continue")
         except Exception:
             print("--------------------")
             traceback.print_exc()
