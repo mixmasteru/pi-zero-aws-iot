@@ -81,7 +81,9 @@ try:
         except publishTimeoutException as pte:
             print("--------------------")
             print(pte.message)
-            print("continue")
+            print("continue try connecting...")
+            myAWSIoTMQTTClient.connect()
+            print("connected")
         except Exception:
             print("--------------------")
             traceback.print_exc()
