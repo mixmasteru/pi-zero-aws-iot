@@ -32,16 +32,16 @@ bme = MyBME280(ic2_address=bme280_ic2, t_offset=bme280_offset)
 sds = SDS011(sds_port, sds_baudrate)
 
 try:
+    # Connect and subscribe to AWS IoT
+    print("connecting...")
+    myAWSIoTMQTTClient.connect()
+    print("connected")
+    # myAWSIoTMQTTClient.subscribe("sdk/test/Python", 1, customCallback)
+    # time.sleep(2)
+
     # Publish to the same topic in a loop forever
     while True:
         try:
-            # Connect and subscribe to AWS IoT
-            print("connecting...")
-            myAWSIoTMQTTClient.connect()
-            print("connected")
-            # myAWSIoTMQTTClient.subscribe("sdk/test/Python", 1, customCallback)
-            # time.sleep(2)
-
             now = time.time()
 
             if (last_time+intv) <= now:
