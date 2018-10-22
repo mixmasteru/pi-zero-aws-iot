@@ -5,11 +5,10 @@ import time
 import json
 import traceback
 
-from AWSIoTPythonSDK.exception.AWSIoTExceptions import publishTimeoutException
-
 from config import *
 from sensor.DHT22 import DHT22
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
+from AWSIoTPythonSDK.exception.AWSIoTExceptions import publishTimeoutException
 
 sleeps = 600
 intv = 600

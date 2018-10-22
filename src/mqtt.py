@@ -9,6 +9,7 @@ from config import *
 from sensor.MyBME280 import MyBME280
 from sensor.SDS011 import SDS011
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
+from AWSIoTPythonSDK.exception.AWSIoTExceptions import publishTimeoutException
 
 sleeps = 60
 intv = 600
@@ -25,11 +26,7 @@ myAWSIoTMQTTClient.configureConnectDisconnectTimeout(10)  # 10 sec
 myAWSIoTMQTTClient.configureMQTTOperationTimeout(5)  # 5 sec
 
 print("Start\n")
-# Connect and subscribe to AWS IoT
-myAWSIoTMQTTClient.connect()
-print("connected\n")
-# myAWSIoTMQTTClient.subscribe("sdk/test/Python", 1, customCallback)
-# time.sleep(2)
+
 last_time = 0
 bme = MyBME280(ic2_address=bme280_ic2, t_offset=bme280_offset)
 sds = SDS011(sds_port, sds_baudrate)
@@ -38,6 +35,13 @@ try:
     # Publish to the same topic in a loop forever
     while True:
         try:
+            # Connect and subscribe to AWS IoT
+            print("connecting...")
+            myAWSIoTMQTTClient.connect()
+            print("connected")
+            # myAWSIoTMQTTClient.subscribe("sdk/test/Python", 1, customCallback)
+            # time.sleep(2)
+
             now = time.time()
 
             if (last_time+intv) <= now:
@@ -74,6 +78,10 @@ try:
 
                 last_time = now
             time.sleep(sleeps)
+        except publishTimeoutException as pte:
+            print("--------------------")
+            print(pte.message)
+            print("continue")
         except Exception:
             print("--------------------")
             traceback.print_exc()
