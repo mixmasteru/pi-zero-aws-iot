@@ -11,10 +11,7 @@ class MyBME280(Base):
 
     def __init__(self, ic2_address, t_offset=0.0):
         self.t_offset = t_offset
-        self.sensor = BME280(address=ic2_address,
-                             t_mode=BME280_OSAMPLE_8,
-                             p_mode=BME280_OSAMPLE_8,
-                             h_mode=BME280_OSAMPLE_8)
+        self.sensor = BME280(address=ic2_address)
 
     def read_sensor(self):
         self.temperature = None

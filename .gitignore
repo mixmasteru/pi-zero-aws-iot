@@ -112,3 +112,4 @@ venv.bak/
 *.key
 *.pem
 *.crt
+/Adafruit_Python_BME280/
