@@ -1,6 +1,12 @@
 # pi-zero-aws-iot
 ## AWS IoT on raspberry pi zero
 
+### install aws cert stuff
+check [aws](https://docs.aws.amazon.com/iot/latest/developerguide/server-authentication.html#server-authentication-certs) for current urls
+
+wget https://www.amazontrust.com/repository/AmazonRootCA1.pem
+upload thing pem.crt
+
 ### install dependencies:
 ```bash
 sudo apt-get update
