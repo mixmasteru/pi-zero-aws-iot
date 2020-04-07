@@ -11,7 +11,7 @@ upload thing pem.crt
 ### install dependencies:
 ```bash
 sudo apt-get update
-apt-get install -y build-essential python-pip python-dev python-smbus git
+sudo apt-get install -y build-essential python-pip python-dev python-smbus git
 pip install -r requirements.txt 
 
 git clone https://github.com/adafruit/Adafruit_Python_DHT.git
