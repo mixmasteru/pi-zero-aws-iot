@@ -8,7 +8,7 @@ wget https://www.amazontrust.com/repository/AmazonRootCA1.pem
 ```
 upload thing pem.crt
 
-### install dependencies:
+### install dependencies
 ```bash
 sudo apt-get update
 sudo apt-get install -y build-essential python-pip python-dev python-smbus git
@@ -27,7 +27,12 @@ cd Adafruit_Python_BME280
 sudo python setup.py install
 ```
 
+### config raspi
 for BME280 enable i2c with raspi-config tool
+```bash
+sudo raspi-config 
+``` 
+
 check i2c address with command
 ```bash
 sudo i2cdetect -y 1
