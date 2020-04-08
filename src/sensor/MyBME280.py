@@ -1,9 +1,8 @@
 from .Base import Base
-from Adafruit_BME280 import *
+from BME280 import BME280
 
 
 class MyBME280(Base):
-
     temperature = None
     pressure = None
     humidity = None
@@ -11,17 +10,16 @@ class MyBME280(Base):
 
     def __init__(self, ic2_address, t_offset=0.0):
         self.t_offset = t_offset
-        self.sensor = BME280(address=ic2_address)
+        self.sensor = BME280()
 
     def read_sensor(self):
         self.temperature = None
         self.pressure = None
         self.humidity = None
-
-        self.temperature = self.sensor.read_temperature()-self.t_offset
-        pascals = self.sensor.read_pressure()
-        self.pressure = pascals / 100
-        self.humidity = self.sensor.read_humidity()
+        data = self.sensor.read_data()
+        self.temperature = data['c'] - self.t_offset
+        self.pressure = data['p']
+        self.humidity = data['h']
         return True
 
     def get_temp_payload(self, now):
